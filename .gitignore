@@ -8,6 +8,18 @@ mcp-client/.env
 # Dependencies
 node_modules/
 .venv/
+mcp-client/.venv/
+
+# Python cache and build files
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+.mypy_cache/
 
 # Database backups
 backup_german_learning_*.sql
@@ -15,3 +27,9 @@ backup_german_learning_*.sql
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# IDE files
+.vscode/settings.json
+*.swp
+*.swo
+*~

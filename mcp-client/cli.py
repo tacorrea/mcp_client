@@ -7,6 +7,7 @@ import json
 import sys
 from client.core import MCPClient, MCPServerConfig
 from client.health.monitor import HealthMonitor
+from client.german_llm.cli import handle_german_command
 
 
 class MCPClientCLI:
@@ -55,8 +56,19 @@ MCP Client CLI Commands:
   health  - Show health check results
   ping    - Ping all servers (or specify server name)
   tools   - List available tools
+  german  - German language learning commands
   help    - Show this help message
   exit    - Exit the CLI
+
+German Language Learning Commands:
+  german init [config]          - Initialize analyzer (configs: default, fast, comprehensive, beginner)
+  german check 'text'           - Quick grammar check
+  german analyze 'text'         - Comprehensive analysis
+  german explain 'topic'        - Explain grammar topic
+  german correct 'text'         - Correct with explanations
+  german session topic1,topic2  - Create learning session
+  german status                 - Show analyzer status
+  german cleanup                - Clean up resources
         """)
 
 
@@ -88,6 +100,11 @@ async def interactive_mode():
                 await cli.tools()
             elif command == "help":
                 cli.help()
+            elif command.startswith("german"):
+                # Handle German language learning commands
+                parts = command.split()
+                german_args = parts[1:] if len(parts) > 1 else []
+                await handle_german_command(german_args)
             else:
                 print("Unknown command. Type 'help' for available commands.")
                 
